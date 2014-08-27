@@ -14,8 +14,20 @@ sections = {}
 for x in json.loads(cl.get_sections(project_id, 0)):
     sections[x['name']] = x['id']
 
-t = get_tests(tests_dir)
-#t = __get_source_files(tests_dir)
-print len(t)
-print t[0].to_json_dict()
-cl.add_case(t[0])
+cases = {}
+for x in json.loads(cl.get_all_cases(project_id)):
+    cases[x['title']] = x['id']
+
+testcases = get_tests(tests_dir)
+for testcase in testcases:
+    if testcase.suite_name not in suites:
+        new_suite = json.loads(cl.create_suite(project_id, testcase.suite_name))
+        suites[new_suite['name']] = new_suite['id']
+    if testcase.section_name not in sections:
+        new_section = json.loads(cl.create_section(project_id, testcase.suite_id, testcase.name))
+        sections[new_section['name']] = new_section['id']
+
+    if testcase.name in cases:
+        cl.update_case(cases[testcase.title], testcase)
+    else:
+        cl.add_case(sections[testcase.section_name], testcase)
