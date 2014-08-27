@@ -80,7 +80,7 @@ class APIClient:
         return result
 
     def add_case(self, section_id, testcase):
-        self.send_post('add_case/'+str(section_id), testcase.to_json_dict())
+        return self.send_post('add_case/'+str(section_id), testcase.to_json_dict())
 
     def get_suites(self, project_id):
         return self.send_get('get_suites/'+str(project_id))
@@ -89,10 +89,16 @@ class APIClient:
         return self.send_get('get_sections/'+str(project_id)+'&suite_id='+str(suite_id))
 
     def create_section(self, project_id, suite_id, name, parent_id=None):
-        self.send_post('add_section/'+str(project_id), dict(suite_id=suite_id, name=name, parent_id=parent_id))
+        return self.send_post('add_section/'+str(project_id), dict(suite_id=suite_id, name=name, parent_id=parent_id))
 
     def create_suite(self, project_id, name, description=None):
-        self.send_post('add_suite/'+str(project_id), dict(name=name, description=description))
+        return self.send_post('add_suite/'+str(project_id), dict(name=name, description=description))
+
+    def get_all_cases(self, project_id):
+        return self.send_get('get_cases/'+str(project_id))
+
+    def update_case(self, case_id, testcase):
+        return self.send_post('update_case/'+str(case_id), testcase.to_json_dict())
 
 class APIError(Exception):
     pass
