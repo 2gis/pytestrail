@@ -8,11 +8,9 @@ class TestRailTestCase:
         self.priority_id = 4
 
     def to_json_dict(self):
-        jobject = {
+        return {
             'title': self.title,
             'type_id': self.type_id,
             'priority_id': self.priority_id,
             'custom_steps_separated': self.steps
         }
-
-        return jobject
