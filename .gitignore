@@ -2,3 +2,7 @@ source_files_parser.pyc
 testrail/__init__.pyc
 testrail/testcase.pyc
 testrail/testrail.pyc
+tests/test_docstring_parser.pyc
+tests/test_get_tests.pyc
+tests/test_data/__init__.pyc
+tests/test_data/sample_tests.pyc
