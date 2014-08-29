@@ -100,5 +100,8 @@ class APIClient:
     def update_case(self, case_id, testcase):
         return self.send_post('update_case/'+str(case_id), testcase.to_json_dict())
 
+    def delete_case(self, case_id):
+        return self.send_post('delete_case/'+str(case_id), None)
+
 class APIError(Exception):
     pass
