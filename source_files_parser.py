@@ -4,7 +4,7 @@ import os
 import imp
 import types
 
-from docstring_parser import get_test_steps, get_section, get_suite, get_test_name
+from docstring_parser import get_test_steps, get_section, get_suite, get_test_title
 from testrail.testcase import TestRailTestCase
 
 
@@ -32,6 +32,7 @@ def get_tests(tests_dir):
     :param tests_dir:
     :return:
     """
+    tests_dir = os.path.abspath(tests_dir)
     tests = set()
     for file in __get_source_files(tests_dir):
         module = imp.load_source('', file)
@@ -40,16 +41,15 @@ def get_tests(tests_dir):
         for module_class in module_classes:
             module_tests.extend(inspect.getmembers(module_class[1], predicate=__istestmethod))
         tests.update(module_tests)
-        get_testrail_testcases(tests)
-    return get_testrail_testcases(tests)
+    return __get_testrail_testcases(tests)
 
 
-def get_testrail_testcases(tests):
+def __get_testrail_testcases(tests):
     testcases = []
     for test in tests:
         if test[1].__doc__ is not None:
             testcases.append(
-                TestRailTestCase(get_test_name(test[1]),
+                TestRailTestCase(get_test_title(test[1]),
                                  get_section(test[1]),
                                  get_suite(test[1]),
                                  get_test_steps(test[1])
