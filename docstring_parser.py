@@ -3,6 +3,8 @@ from collections import defaultdict
 
 
 def get_test_steps(object):
+    if object.__doc__ is None:
+        return None
     docstring = object.__doc__.split('\n')
     steps = []
     step = defaultdict(lambda : '')
@@ -21,28 +23,32 @@ def get_test_steps(object):
 
 
 def get_section(object):
+    if object.__doc__ is None:
+        return None
     docstring = object.__doc__.split('\n')
-    docstring[0] = 'section: section name'
     for str in docstring:
-        if str.lower().startswith('section'):
+        if str.strip().lower().startswith('section:'):
             section = str[str.find(':') + 1:].strip()
             return section
 
 
 def get_suite(object):
+    if object.__doc__ is None:
+        return None
     docstring = object.__doc__.split('\n')
-    docstring[0] = 'suite: suite name'
     for str in docstring:
-        if str.lower().startswith('suite'):
+        if str.strip().lower().startswith('suite:'):
             suite = str[str.find(':') + 1:].strip()
             return suite
 
 
-def get_test_name(object):
+def get_test_title(object):
+    if object.__doc__ is None:
+        return None
     docstring = object.__doc__.split('\n')
     name = object.__name__
     for str in docstring:
-        if str.lower().startswith('title'):
+        if str.strip().lower().startswith('title:'):
             name = str[str.find(':') + 1:].strip()
             break
     return name
