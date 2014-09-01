@@ -14,6 +14,14 @@ class Tests:
         """
         pass
 
+    def test_without_steps(self):
+        """
+        title: Blood Pressure
+        section: The Lost Broken Bones
+        suite: Useless Id
+        """
+        pass
+
     def test_steps_with_multiple_results(self):
         """
         title: Blood Pressure

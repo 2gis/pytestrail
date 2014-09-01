@@ -8,8 +8,8 @@ from docstring_parser import get_test_steps, get_section, get_suite, get_test_ti
 from testrail.testcase import TestRailTestCase
 
 
-def __istestmethod(object):
-    return isinstance(object, types.MethodType) and object.__name__.startswith('test')
+def __istestmethod(obj):
+    return isinstance(obj, types.MethodType) and obj.__name__.startswith('test')
 
 
 def __get_source_files(path):
@@ -20,9 +20,9 @@ def __get_source_files(path):
     """
     test_files = []
     for root, dirs, files in os.walk(path):
-        for file in files:
-            if not file.startswith('__') and file.endswith('.py'):
-                test_files.append(os.path.join(root, file))
+        for filename in files:
+            if not filename.startswith('__') and filename.endswith('.py'):
+                test_files.append(os.path.join(root, filename))
     return test_files
 
 
@@ -34,8 +34,8 @@ def get_tests(tests_dir):
     """
     tests_dir = os.path.abspath(tests_dir)
     tests = set()
-    for file in __get_source_files(tests_dir):
-        module = imp.load_source('', file)
+    for filepath in __get_source_files(tests_dir):
+        module = imp.load_source('', filepath)
         module_classes = inspect.getmembers(module, predicate=inspect.isclass)
         module_tests = []
         for module_class in module_classes:
