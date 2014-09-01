@@ -6,3 +6,4 @@ tests/test_docstring_parser.pyc
 tests/test_get_tests.pyc
 tests/test_data/__init__.pyc
 tests/test_data/sample_tests.pyc
+test_testRailTestCase.pyc
