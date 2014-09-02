@@ -1,29 +1,13 @@
 # README #
-
-This README would normally document whatever steps are necessary to get your application up and running.
-
 ### What is this repository for? ###
 
 * Quick summary
 * Version
 * [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
 
-### How do I get set up? ###
-
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+### Tests Description ###
+In all docstrings in tests you want to import into TestRail must start with following strings:
+* title: Test title which appears in TestRail as testcase`s name (will take test method name if title: is not presented)
+* suite: Testsuite name (required, will be created if not presented)
+* section: Section name in defined suite (required, will be created if not presented)
+* steps
