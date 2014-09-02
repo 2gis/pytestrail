@@ -15,9 +15,9 @@ import base64
 
 
 class APIClient:
-    def __init__(self, base_url):
-        self.user = 'v.chapaev'
-        self.password = '123qwe!'
+    def __init__(self, base_url, login, password):
+        self.user = login
+        self.password = password
         if not base_url.endswith('/'):
             base_url += '/'
         self.__url = base_url + 'index.php?/api/v2/'
@@ -97,8 +97,8 @@ class APIClient:
     def create_suite(self, project_id, name, description=None):
         return self.send_post('add_suite/' + str(project_id), dict(name=name, description=description))
 
-    def get_all_cases(self, project_id):
-        return self.send_get('get_cases/' + str(project_id))
+    def get_all_cases(self, project_id, suite_id):
+        return self.send_get('get_cases/' + str(project_id)+'&suite_id='+str(suite_id))
 
     def update_case(self, case_id, testcase):
         return self.send_post('update_case/' + str(case_id), testcase.to_json_dict())
