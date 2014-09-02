@@ -64,7 +64,6 @@ def __get_testrail_testcases(tests):
                     TestRailTestCase(title=title,
                                      section=section,
                                      suite=suite,
-                                     steps=steps
-                    )
+                                     steps=steps)
                 )
     return testcases
