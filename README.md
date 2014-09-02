@@ -22,7 +22,7 @@ Each step must start with a dash (-). After any amount of steps may be expected 
 ```
 #!python
 
-def test_new_feature(self):
+def test_party(self):
     """
     title: Testcase Example
     suite: Testsuite Example
