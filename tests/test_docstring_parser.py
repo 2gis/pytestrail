@@ -1,3 +1,4 @@
+# coding=utf-8
 from unittest import TestCase
 from docstring_parser import get_section, get_test_title, get_suite, get_test_steps
 from test_data.sample_tests import Tests
@@ -40,7 +41,7 @@ class TestGetSuite(TestCase):
 
 class TestGetSteps(TestCase):
     def test_get_steps(self):
-        expected_steps = [{'content': '- Get friends\n- Get Playstation\n', 'expected': 'OP: Fun in progress\n'}]
+        expected_steps = [{'content': '- Get friends\n- Get Playstation\n', 'expected': 'Fun in progress\n'}]
         steps = get_test_steps(Tests.test_something_cool)
         self.assertEqual(expected_steps, steps, "Steps must be '%s'. Got '%s' instead." % (expected_steps, steps))
 
@@ -54,11 +55,18 @@ class TestGetSteps(TestCase):
         self.assertEqual(expected_steps, steps, "Steps must be '%s'. Got '%s' instead." % (expected_steps, steps))
 
     def test_get_steps_with_multiple_results(self):
-        expected_steps = [{'content': '- Get friends\n- Get Playstation\n', 'expected': 'OP: Fun in progress\n'},
-                          {'content': '- Get sixpack\n', 'expected': 'OP: More fun\n'}]
+        expected_steps = [{'content': '- Get friends\n- Get Playstation\n', 'expected': 'Fun in progress\n'},
+                          {'content': '- Get sixpack\n', 'expected': 'ОР написано по-русски\n'}]
         steps = get_test_steps(Tests.test_steps_with_multiple_results)
         self.assertEqual(expected_steps, steps, "Steps must be '%s'. Got '%s' instead." % (expected_steps, steps))
 
     def test_get_steps_without_steps_definition(self):
         steps = get_test_steps(Tests.test_without_steps)
         self.assertEqual(steps, [], "Steps must be 'None'. Got '%s' instead." % steps)
+
+    def test_get_steps_with_equals_sign(self):
+        expected_steps = [
+            {'content': '- Get sixpack\n- Get friends\n- Get Playstation\n',
+             'expected': 'Fun in progress\nHardcore gaming\n'}]
+        steps = get_test_steps(Tests.test_with_no_title)
+        self.assertEqual(expected_steps, steps, "Steps must be '%s'. Got '%s' instead." % (expected_steps, steps))

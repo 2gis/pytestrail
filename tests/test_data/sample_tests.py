@@ -1,10 +1,11 @@
+# coding=utf-8
 class Tests:
     def __init__(self):
         pass
 
     def test_something_cool(self):
         """
-        title: Blood Pressure
+        title: Killing A Ghost
         section: The Lost Broken Bones
         suite: Useless Id
 
@@ -16,7 +17,7 @@ class Tests:
 
     def test_without_steps(self):
         """
-        title: Blood Pressure
+        title: No Steps Here!
         section: The Lost Broken Bones
         suite: Useless Id
         """
@@ -32,13 +33,13 @@ class Tests:
         - Get Playstation
         OP: Fun in progress
         - Get sixpack
-        OP: More fun
+        ОР: ОР написано по-русски
         """
         pass
 
     def test_steps_with_no_result(self):
         """
-        title: Blood Pressure
+        title: Isolate Me
         section: The Lost Broken Bones
         suite: Useless Id
 
@@ -50,11 +51,13 @@ class Tests:
     def test_with_no_title(self):
         """
         section: The Lost Broken Bones
+        suite: Useless Id
 
         - Get sixpack
         - Get friends
         - Get Playstation
-        OP: Fun in progress
+        = Fun in progress
+        = Hardcore gaming
         """
         pass
 

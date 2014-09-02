@@ -14,9 +14,11 @@ def get_test_steps(obj):
                 steps.append(step)
                 step = defaultdict(lambda: '')
             step['content'] += docstr.strip() + '\n'
-        if docstr.strip().startswith('ОР') or docstr.strip().startswith('OP'):
+        if docstr.strip().startswith('ОР') or docstr.strip().startswith('OP'): #or docstr.strip().startswith('='):
             # на всякий случай, ОР написал по-русски и по-английски
-            step['expected'] += docstr.strip() + '\n'
+            step['expected'] += docstr[docstr.find(':') + 1:].strip() + '\n'
+        elif docstr.strip().startswith('='):
+            step['expected'] += docstr[docstr.find('=') + 1:].strip() + '\n'
     if len(step['content']) > 0 or len(step['expected']) > 0:
         steps.append(step)
     return steps
