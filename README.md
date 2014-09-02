@@ -22,14 +22,15 @@ Each step must start with a dash (-). After any amount of steps may be expected 
 ```
 #!python
 
-"""
-title: Testcase Example
-suite: Testsuite Example
-section: Section Example
-- Get sixpack
-- Get friends
-= Fun in progress
-- Get Playstation
-= Hardcore gaming in progress
-"""
+def test_new_feature(self):
+    """
+    title: Testcase Example
+    suite: Testsuite Example
+    section: Section Example
+    - Get sixpack
+    - Get friends
+    = Fun in progress
+    - Get Playstation
+    = Hardcore gaming in progress
+    """
 ```
