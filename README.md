@@ -15,4 +15,21 @@ In all docstrings in tests you want to import into TestRail must start with foll
 * __section:__ Section name in defined suite (required, will be created if not presented)
 
 ### Steps description ###
-Each step must start with a dash (-). After any amount of steps may be expected result: a s tring which starts with equals sign (=)
+Each step must start with a dash (-). After any amount of steps may be expected result: a s tring(s) which starts with equals sign (=)
+
+## Example ##
+
+```
+#!python
+
+"""
+title: Testcase Example
+suite: Testsuite Example
+section: Section Example
+- Get sixpack
+- Get friends
+- Get Playstation
+= Fun in progress
+= Hardcore gaming in progress
+"""
+```
