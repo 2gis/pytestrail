@@ -44,15 +44,27 @@ def get_tests(tests_dir):
     return __get_testrail_testcases(tests)
 
 
+def can_create_testcase(title, suite, section, steps):
+    return title is not None and len(title) > 0 \
+        and section is not None and len(section) > 0 \
+        and suite is not None and len(suite) > 0 \
+        and steps is not None and len(steps) > 0
+
+
 def __get_testrail_testcases(tests):
     testcases = []
     for test in tests:
         if test[1].__doc__ is not None:
-            testcases.append(
-                TestRailTestCase(get_test_title(test[1]),
-                                 get_section(test[1]),
-                                 get_suite(test[1]),
-                                 get_test_steps(test[1])
+            title = get_test_title(test[1])
+            section = get_section(test[1])
+            suite = get_suite(test[1])
+            steps = get_test_steps(test[1])
+            if can_create_testcase(title, suite, section, steps):
+                testcases.append(
+                    TestRailTestCase(get_test_title(test[1]),
+                                     get_section(test[1]),
+                                     get_suite(test[1]),
+                                     get_test_steps(test[1])
+                    )
                 )
-            )
     return testcases
