@@ -28,8 +28,8 @@ suite: Testsuite Example
 section: Section Example
 - Get sixpack
 - Get friends
-- Get Playstation
 = Fun in progress
+- Get Playstation
 = Hardcore gaming in progress
 """
 ```
