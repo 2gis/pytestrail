@@ -61,10 +61,10 @@ def __get_testrail_testcases(tests):
             steps = get_test_steps(test[1])
             if can_create_testcase(title, suite, section, steps):
                 testcases.append(
-                    TestRailTestCase(get_test_title(test[1]),
-                                     get_section(test[1]),
-                                     get_suite(test[1]),
-                                     get_test_steps(test[1])
+                    TestRailTestCase(title=title,
+                                     section=section,
+                                     suite=suite,
+                                     steps=steps
                     )
                 )
     return testcases
