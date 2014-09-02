@@ -1,9 +1,4 @@
 # README #
-## What is this repository for? ##
-
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
 
 ## Tests Description ##
 In all docstrings in tests you want to import into TestRail must start with following strings:
