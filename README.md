@@ -33,4 +33,5 @@ def test_new_feature(self):
     - Get Playstation
     = Hardcore gaming in progress
     """
+    pass
 ```
