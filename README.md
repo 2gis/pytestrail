@@ -1,5 +1,5 @@
 # README #
-
+A simple app to import unittest cautotests into TestRail.
 ## Tests Description ##
 In all docstrings in tests you want to import into TestRail must start with following strings:
 
