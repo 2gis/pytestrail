@@ -12,6 +12,8 @@ A simple app to import unittest autotests into TestRail.
 
 * __--tests_dir (-d)__ Directory with tests to import 
 
+* __--delete_tests (-D)__ Deletes all tests from TestRail that was deleted from Python files
+
 ## Tests Description ##
 In all docstrings in tests you want to import into TestRail must start with following strings:
 
