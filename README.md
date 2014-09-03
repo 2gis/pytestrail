@@ -1,5 +1,17 @@
 # README #
 A simple app to import unittest autotests into TestRail.
+
+## Command Line Parameters ##
+* __--project (-p)__ TestRail project id (number)
+
+* __--base_url (-H)__ TesRail address. http://testrail.local/ for example
+
+* __--login (-l)__ TestRail username
+
+* __--password (-P)__ User`s password
+
+* __--tests_dir (-d)__ Directory with tests to import 
+
 ## Tests Description ##
 In all docstrings in tests you want to import into TestRail must start with following strings:
 
