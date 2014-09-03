@@ -13,6 +13,9 @@ if __name__ == '__main__':
     parser.add_argument('-l', '--login', help='Testrail login', type=str)
     parser.add_argument('-P', '--password', help='Testrail password', type=str)
     parser.add_argument('-d', '--tests_dir', help='Tests directory', type=str, default='./tests')
+    parser.add_argument('-D', '--delete_tests',
+                        help='Deletes all tests from TestRail that was deleted from Python files', action='store_true',
+                        default=False)
     args = parser.parse_args()
 
     cl = APIClient(args.base_url, args.login, args.password)
@@ -40,25 +43,26 @@ if __name__ == '__main__':
     for x in testcases:
         actual_cases[x.title] = x
 
-    for case_title, case_id in cases.iteritems():
-        if case_title not in actual_cases:
-            print 'Delete case: '+case_title
-            cl.delete_case(case_id)
+    if args.delete_tests:
+        for case_title, case_id in cases.iteritems():
+            if case_title not in actual_cases:
+                print 'Delete case: ' + case_title
+                cl.delete_case(case_id)
 
     for testcase in testcases:
         if testcase.suite_name not in suites:
-            print 'Create suite: '+testcase.suite_name
+            print 'Create suite: ' + testcase.suite_name
             new_suite = cl.create_suite(project_id, testcase.suite_name)
             suites[new_suite['name']] = new_suite['id']
 
         if testcase.section_name not in sections:
-            print 'Create section "'+testcase.section_name+'" in suite "'+testcase.suite_name+'"'
+            print 'Create section "' + testcase.section_name + '" in suite "' + testcase.suite_name + '"'
             new_section = cl.create_section(project_id, suites[testcase.suite_name], testcase.section_name)
             sections[new_section['name']] = new_section['id']
 
         if testcase.title in cases:
-            print 'Update case: '+testcase.title
+            print 'Update case: ' + testcase.title
             cl.update_case(cases[testcase.title], testcase)
         else:
-            print 'Create case: '+testcase.title
+            print 'Create case: ' + testcase.title
             cl.add_case(sections[testcase.section_name], testcase)
