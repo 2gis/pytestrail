@@ -1,6 +1,7 @@
 # coding=utf-8
 import argparse
-from os.path import expanduser, expandvars
+from os.path import expanduser, expandvars, dirname
+import sys
 
 from source_files_parser import get_tests
 from testrail.testrail import APIClient
@@ -9,19 +10,23 @@ from testrail.testrail import APIClient
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-p', '--project', help='Project id', type=int)
-    parser.add_argument('-H', '--base_url', help='Testrail address', type=str, default='http://testrail.2gis.local/')
+    parser.add_argument('-H', '--base_url', help='Testrail address', type=str)
     parser.add_argument('-l', '--login', help='Testrail login', type=str)
     parser.add_argument('-P', '--password', help='Testrail password', type=str)
-    parser.add_argument('-d', '--tests_dir', help='Tests directory', type=str, default='./tests')
+    parser.add_argument('-d', '--tests_dir', help='Tests directory', type=str)
     parser.add_argument('-D', '--delete_tests',
                         help='Deletes all tests from TestRail that was deleted from Python files', action='store_true',
                         default=False)
     args = parser.parse_args()
 
     cl = APIClient(args.base_url, args.login, args.password)
-    tests_dir = '/Users/ibakepunk/Projects/desktop4/tests/'
     tests_dir = expandvars(expanduser(args.tests_dir))
     project_id = args.project
+
+    tmp_dir = tests_dir
+    while tmp_dir != '/':
+        sys.path.append(tmp_dir)
+        tmp_dir = dirname(tmp_dir)
 
     suites = {}
     for x in cl.get_suites(project_id):
