@@ -1,7 +1,7 @@
 # README #
 A simple app to import unittest autotests into TestRail.
 
-## Command Line Parameters ##
+## Command Line Parameters (unittestrail.py) ##
 * __--project (-p)__ TestRail project id (number)
 
 * __--base_url (-H)__ TesRail address. http://testrail.local/ for example
