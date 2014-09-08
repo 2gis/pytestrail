@@ -1,6 +1,6 @@
 # coding=utf-8
 import argparse
-from os.path import expanduser, expandvars, dirname
+from os.path import expanduser, expandvars, dirname, isdir, isfile
 import sys
 
 from source_files_parser import get_tests
@@ -13,17 +13,17 @@ if __name__ == '__main__':
     parser.add_argument('-H', '--base_url', help='Testrail address', type=str)
     parser.add_argument('-l', '--login', help='Testrail login', type=str)
     parser.add_argument('-P', '--password', help='Testrail password', type=str)
-    parser.add_argument('-d', '--tests_dir', help='Tests directory', type=str)
+    parser.add_argument('-t', '--tests_path', help='Tests directory or a single file', type=str)
     parser.add_argument('-D', '--delete_tests',
                         help='Deletes all tests from TestRail that was deleted from Python files', action='store_true',
                         default=False)
     args = parser.parse_args()
 
     cl = APIClient(args.base_url, args.login, args.password)
-    tests_dir = expandvars(expanduser(args.tests_dir))
+    tests_path = expandvars(expanduser(args.tests_path))
     project_id = args.project
 
-    tmp_dir = tests_dir
+    tmp_dir = tests_path
     while tmp_dir != '/':
         sys.path.append(tmp_dir)
         tmp_dir = dirname(tmp_dir)
@@ -42,7 +42,7 @@ if __name__ == '__main__':
         for x in cl.get_all_cases(project_id, suite):
             cases[x['title']] = x['id']
 
-    testcases = get_tests(tests_dir)
+    testcases = get_tests(tests_path)
 
     actual_cases = {}
     for x in testcases:

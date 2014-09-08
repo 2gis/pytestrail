@@ -26,15 +26,15 @@ def __get_source_files(path):
     return test_files
 
 
-def get_tests(tests_dir):
+def get_tests(tests_path):
     """
-    Gets list of testcases in :tests_dir recursively
-    :param tests_dir:
+    :param tests_path:
     :return:
     """
-    tests_dir = os.path.abspath(tests_dir)
+    tests_path = os.path.abspath(tests_path)
     tests = set()
-    for filepath in __get_source_files(tests_dir):
+    source_files = __get_source_files(tests_path) if os.path.isdir(tests_path) else [tests_path]
+    for filepath in source_files:
         module = imp.load_source('', filepath)
         module_classes = inspect.getmembers(module, predicate=inspect.isclass)
         module_tests = []
