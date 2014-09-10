@@ -32,15 +32,17 @@ def get_tests(tests_path):
     :return:
     """
     tests_path = os.path.abspath(tests_path)
-    tests = set()
+    tests = {}
     source_files = __get_source_files(tests_path) if os.path.isdir(tests_path) else [tests_path]
     for filepath in source_files:
         module = imp.load_source('', filepath)
         module_classes = inspect.getmembers(module, predicate=inspect.isclass)
-        module_tests = []
+        #module_tests = {}
         for module_class in module_classes:
-            module_tests.extend(inspect.getmembers(module_class[1], predicate=__istestmethod))
-        tests.update(module_tests)
+            test_methods = inspect.getmembers(module_class[1], predicate=__istestmethod)
+            if len(test_methods) > 0:
+                tests[module_class[1]] = test_methods
+        #tests.update(module_tests)
     return __get_testrail_testcases(tests)
 
 
@@ -53,17 +55,20 @@ def can_create_testcase(title, suite, section, steps):
 
 def __get_testrail_testcases(tests):
     testcases = []
-    for test in tests:
-        if test[1].__doc__ is not None:
-            title = get_test_title(test[1])
-            section = get_section(test[1])
-            suite = get_suite(test[1])
-            steps = get_test_steps(test[1])
-            if can_create_testcase(title, suite, section, steps):
-                testcases.append(
-                    TestRailTestCase(title=title,
-                                     section=section,
-                                     suite=suite,
-                                     steps=steps)
-                )
+    for testclass_obj, tests_list in tests.iteritems():
+        default_section = get_section(testclass_obj)
+        default_suite = get_suite(testclass_obj)
+        for test in tests_list:
+            if test[1].__doc__ is not None:
+                title = get_test_title(obj=test[1])
+                section = get_section(obj=test[1], default_section=default_section)
+                suite = get_suite(obj=test[1], default_suite=default_suite)
+                steps = get_test_steps(obj=test[1])
+                if can_create_testcase(title, suite, section, steps):
+                    testcases.append(
+                        TestRailTestCase(title=title,
+                                         section=section,
+                                         suite=suite,
+                                         steps=steps)
+                    )
     return testcases
