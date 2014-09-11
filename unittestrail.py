@@ -1,6 +1,6 @@
 # coding=utf-8
 import argparse
-from os.path import expanduser, expandvars, dirname, isdir, isfile
+from os.path import expanduser, expandvars, dirname
 import sys
 
 from source_files_parser import get_tests
@@ -24,7 +24,7 @@ if __name__ == '__main__':
     project_id = args.project
 
     tmp_dir = tests_path
-    while tmp_dir != '/':
+    while tmp_dir != '/' or (len(tmp_dir) != 3 and tmp_dir[1] != ':'):
         sys.path.append(tmp_dir)
         tmp_dir = dirname(tmp_dir)
 
