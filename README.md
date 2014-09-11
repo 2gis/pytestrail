@@ -23,7 +23,7 @@ In all docstrings in tests you want to import into TestRail must start with foll
 
 * __section:__ Section name in defined suite (required, will be created if not presented)
 
-Suite & section can be specified inside testclass` docstring. If specified in testmethod's docstring, it'll be owerwritten.
+__Suite__ & __section__ can be specified inside testclass` docstring. If specified in testmethod's docstring, it'll be owerwritten.
 
 ### Steps description ###
 Each step must start with a dash (-). After any amount of steps may be expected result: a s tring(s) which starts with equals sign (=)
