@@ -37,12 +37,10 @@ def get_tests(tests_path):
     for filepath in source_files:
         module = imp.load_source('', filepath)
         module_classes = inspect.getmembers(module, predicate=inspect.isclass)
-        #module_tests = {}
         for module_class in module_classes:
             test_methods = inspect.getmembers(module_class[1], predicate=__istestmethod)
             if len(test_methods) > 0:
                 tests[module_class[1]] = test_methods
-        #tests.update(module_tests)
     return __get_testrail_testcases(tests)
 
 
