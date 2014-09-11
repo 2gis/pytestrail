@@ -10,7 +10,7 @@ An app to import unittest autotests into TestRail.
 
 * __--password (-P)__ User`s password
 
-* __--tests_dir (-t)__ Directory with tests to import 
+* __--tests_path (-t)__ Directory with tests to import 
 
 * __--delete_tests (-D)__ Deletes all tests from TestRail that was deleted from Python files
 
