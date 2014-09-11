@@ -1,5 +1,5 @@
 # README #
-A simple app to import unittest autotests into TestRail.
+An app to import unittest autotests into TestRail.
 
 ## Command Line Parameters (unittestrail.py) ##
 * __--project (-p)__ TestRail project id (number)
@@ -10,7 +10,7 @@ A simple app to import unittest autotests into TestRail.
 
 * __--password (-P)__ User`s password
 
-* __--tests_dir (-d)__ Directory with tests to import 
+* __--tests_dir (-t)__ Directory with tests to import 
 
 * __--delete_tests (-D)__ Deletes all tests from TestRail that was deleted from Python files
 
