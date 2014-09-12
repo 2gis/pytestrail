@@ -51,7 +51,6 @@ class Tests:
     def test_with_no_title(self):
         """
         section: The Lost Broken Bones
-        suite: Useless Id
 
         - Get sixpack
         - Get friends

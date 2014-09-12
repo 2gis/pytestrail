@@ -18,7 +18,7 @@ class TestGetSection(TestCase):
 class TestGetName(TestCase):
     def test_get_title(self):
         title = get_test_title(Tests.test_something_cool)
-        self.assertEqual(title, 'Blood Pressure', "Title must be 'Blood Pressure'. Got '%s' instead." % title)
+        self.assertEqual(title, 'Killing A Ghost', "Title must be 'Blood Pressure'. Got '%s' instead." % title)
 
     def test_get_title_without_title_definition(self):
         title = get_test_title(Tests.test_with_no_title)
