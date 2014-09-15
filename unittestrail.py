@@ -25,6 +25,7 @@ if __name__ == '__main__':
 
     tmp_dir = tests_path
     while tmp_dir != '/' or (len(tmp_dir) != 3 and tmp_dir[1] != ':'):
+        print "Appending PYTHONPATH with '%s'" % tmp_dir
         sys.path.append(tmp_dir)
         tmp_dir = dirname(tmp_dir)
 
