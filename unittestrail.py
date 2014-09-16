@@ -26,7 +26,7 @@ if __name__ == '__main__':
     tests_path = expandvars(expanduser(args.tests_path))
     project_id = args.project
 
-    sys.path.extend(args.module_path)
+    sys.path.extend(expandvars(expanduser(args.module_path)))
 
     suites = {}
     for x in cl.get_suites(project_id):
