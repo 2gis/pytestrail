@@ -14,6 +14,9 @@ if __name__ == '__main__':
     parser.add_argument('-l', '--login', help='Testrail login', type=str)
     parser.add_argument('-P', '--password', help='Testrail password', type=str)
     parser.add_argument('-t', '--tests_path', help='Tests directory or a single file', type=str)
+    parser.add_argument('-m', '--module_path',
+                        help='Path(s) to modules that will be imported in tests. Usually it`s project root directory',
+                        action='append')
     parser.add_argument('-D', '--delete_tests',
                         help='Deletes all tests from TestRail that was deleted from Python files', action='store_true',
                         default=False)
@@ -23,10 +26,7 @@ if __name__ == '__main__':
     tests_path = expandvars(expanduser(args.tests_path))
     project_id = args.project
 
-    tmp_dir = tests_path
-    while tmp_dir != '/' or (len(tmp_dir) != 3 and tmp_dir[1] != ':'):
-        sys.path.append(tmp_dir)
-        tmp_dir = dirname(tmp_dir)
+    sys.path.extend(expandvars(expanduser(args.module_path)))
 
     suites = {}
     for x in cl.get_suites(project_id):
